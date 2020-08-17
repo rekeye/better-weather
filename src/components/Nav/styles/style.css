@@ -1,0 +1,65 @@
+nav {
+  height: 100vh;
+  width: 20vw;
+  background: -webkit-gradient(linear, left top, left bottom, from(#006CA4), to(#0078D4));
+  background: linear-gradient(#006CA4, #0078D4);
+  font-size: clamp(1.4rem, 1.75vw, 2.4rem);
+  color: #DFDFDF;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+nav * {
+  width: 90%;
+}
+
+nav hr {
+  height: 2px;
+  background: #DFDFDF;
+  border-color: #DFDFDF;
+}
+
+.logo {
+  width: min(200px, 90%);
+}
+
+.location {
+  height: 11vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.links {
+  height: 62vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+footer {
+  font-size: clamp(0.8rem, 1.25vw, 1.5rem);
+}
+/*# sourceMappingURL=style.css.map */

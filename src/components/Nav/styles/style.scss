@@ -1,0 +1,38 @@
+@import '../../../assets/scss/variables';
+
+nav {
+    height: 100vh;
+    width: 20vw;
+    background: linear-gradient($background-1, $background-2);
+    font-size: clamp(1.4rem, 1.75vw, 2.4rem);
+    color: $grey;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    * {
+        width: 90%;
+    }
+    hr {
+        height: 2px;
+        background: $grey;
+        border-color: $grey;
+    }
+}
+.logo {
+    width: #{'min(200px, 90%)'};
+}
+.location {
+    height: 11vh;
+    display: flex;
+    flex-direction: column;
+}
+.links {
+    height: 62vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+footer {
+    font-size: clamp(0.8rem, 1.25vw, 1.5rem);
+}
