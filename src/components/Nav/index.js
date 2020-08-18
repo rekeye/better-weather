@@ -10,11 +10,11 @@ const Nav = (props) => (
             <hr/>
 
             <div className='location'>
-                <span>City, </span>
-                <span>Country</span>
+                <span>{props.location.city}, </span>
+                <span>{props.location.country}</span>
             </div>
 
-            <Search/>
+            <Search searchHandler={props.searchHandler}/>
 
             <div className='links'>
                 <div>Current <FontAwesomeIcon icon={faChevronRight}/></div>
