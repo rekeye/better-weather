@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "style.scss",
+        "../../../assets/scss/_variables.scss"
+    ],
+    "names": [],
+    "file": "style.css"
+}

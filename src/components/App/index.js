@@ -2,6 +2,10 @@ import React from 'react';
 import Axios from 'axios';
 import './styles/style.css';
 import Nav from '../Nav/index.js';
+import Current from '../Current/index.js';
+import Hbh from '../Hbh/index.js';
+import Dbd from '../Dbd/index.js';
+
 import API from '../../assets/const/API.js';
 
 export default class App extends React.Component {
@@ -9,8 +13,10 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       coordinates: {},
-      location: {}
+      location: {},
+      mainType: 'current'
     }
+
     this.getCoords = this.getCoords.bind(this);
     this.getLocation = this.getLocation.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
@@ -81,9 +87,14 @@ export default class App extends React.Component {
   }
 
   render() {
+    const type = this.state.mainType; //pick the type that is being rendered
     return (
       <div className='App'>
         <Nav location={this.state.location} searchHandler={this.handleSearch}/>
+        {/*  will add props later */}
+        {type==='current' && <Current/>} 
+        {type==='hbh' && <Hbh/>}
+        {type==='dbd' && <Dbd/>}
       </div>
     );
   }
