@@ -1,12 +1,13 @@
 import React from 'react';
 import Axios from 'axios';
 import './styles/style.css';
+//components
 import Nav from '../Nav/index.js';
 import Current from '../Current/index.js';
 import Hbh from '../Hbh/index.js';
-import Dbd from '../Dbd/index.js';
-
-import API from '../../assets/const/API.js';
+import Dbd from '../Dbd/index.js'; 
+//constant
+import API from '../../assets/const/API.js'; 
 
 export default class App extends React.Component {
   constructor(props) {
@@ -26,19 +27,19 @@ export default class App extends React.Component {
     this.getCoords(); 
   }
   getCoords() {
-    return navigator.geolocation.getCurrentPosition(
+    return navigator.geolocation.getCurrentPosition( //get the position of user
       position => {
         this.setState({
-          coordinates: {lat: position.coords.latitude, lon: position.coords.longitude}
+          coordinates: {lat: position.coords.latitude, lon: position.coords.longitude} //pass the coords to a state
         });
         this.getLocation(); //run the api call after coords have been passed
       },
       error => {
-        alert(error.message);
+        console.log(`Position call failed: ${error.message}`);
       }
     );
   }
-  getLocation() {
+  getLocation() { //get location data - city and country for display in navbar
     Axios({
       method: 'get',
       url: API.locationUrl,
@@ -53,15 +54,15 @@ export default class App extends React.Component {
     .then(response => {
       const address = response.data.address;
       this.setState({
-        location: {city: address.city, country: address.country}
+        location: {city: address.city, country: address.country} //pass the data to a state
       });
     })
     .catch(error => {
-      console.log('Location call failed: ' + error.message);
+      console.log(`Location call failed: ${error.message}`);
     })
   }
-  handleSearch(event) {
-    event.preventDefault();
+  handleSearch(event) { //get the position of user based on searched value
+    event.preventDefault(); //prevents the search form from reloading the page
     Axios({
       method: 'get',
       url: API.searchUrl,
@@ -74,20 +75,19 @@ export default class App extends React.Component {
       }
     })
     .then(response => {
-      console.log(response);
       const result = response.data[0];
-      this.setState({
+      this.setState({ //passing the data to a state
         coordinates: {lat: result.lat, lon: result.lon},
         location: {city: result.address.city, country: result.address.country}
       })
     })
     .catch(error => {
-      alert(error.message);
+      console.log(`Location call failed: ${error.message}`);
     })
   }
 
   render() {
-    const type = this.state.mainType; //pick the type that is being rendered
+    const type = this.state.mainType; //pick the type of main that is being rendered, its changed by the navbar
     return (
       <div className='App'>
         <Nav location={this.state.location} searchHandler={this.handleSearch}/>

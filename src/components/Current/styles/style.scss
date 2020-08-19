@@ -1,1 +1,23 @@
 @import '../../../assets/scss/variables';
+
+.container {
+    width: 100%;
+    display: flex;
+    &--parent {
+        padding: 1.5em;
+        flex-direction: column;
+    }
+    &--additional {
+        padding-top: 1.5em;
+        flex-wrap: wrap;
+    }
+}
+.data {
+    border: 0.3em solid $blue-2;
+    padding: 1.5em;
+    &--main {
+        width: 100%;
+    }
+    &--additional {
+    }
+}
