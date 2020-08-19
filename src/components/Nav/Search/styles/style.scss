@@ -9,16 +9,16 @@
     }
     input {
         padding-left: 6px;
-        border-right: 2px solid $background-1;
+        border-right: 2px solid $blue-1;
         font-size: clamp(1.125rem, 1.25vw, 1.65rem);
-        color: $background-1;
+        color: $blue-1;
         ::placeholder {
-            color: $background-1;
+            color: $blue-1;
         }
     }
     button {
-        width: 2vw;
+        width: 2.25em;
         font-size: clamp(1rem, 1.2vw, 1.5rem);
-        color: $background-1;
+        color: $blue-1;
     }
 }

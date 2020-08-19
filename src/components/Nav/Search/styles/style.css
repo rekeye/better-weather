@@ -34,7 +34,7 @@
 }
 
 .search button {
-  width: 2vw;
+  width: 2.25em;
   font-size: clamp(1rem, 1.2vw, 1.5rem);
   color: #006CA4;
 }

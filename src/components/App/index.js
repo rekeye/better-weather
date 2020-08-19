@@ -6,8 +6,9 @@ import Nav from '../Nav/index.js';
 import Current from '../Current/index.js';
 import Hbh from '../Hbh/index.js';
 import Dbd from '../Dbd/index.js'; 
-//constant
-import API from '../../assets/const/API.js'; 
+//constants
+import LOCATIONIQ from '../../assets/const/LOCATIONIQ.js'; 
+import WEATHER from '../../assets/const/WEATHER.js'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -15,12 +16,14 @@ export default class App extends React.Component {
     this.state = {
       coordinates: {},
       location: {},
+      language: 'en', //it'll be changeable in future patches
       mainType: 'current'
     }
 
     this.getCoords = this.getCoords.bind(this);
     this.getLocation = this.getLocation.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    this.getWeatherData = this.getWeatherData.bind(this);
   }
 
   componentDidMount() {
@@ -42,9 +45,9 @@ export default class App extends React.Component {
   getLocation() { //get location data - city and country for display in navbar
     Axios({
       method: 'get',
-      url: API.locationUrl,
+      url: LOCATIONIQ.locationUrl,
       params: {
-          key: API.key,
+          key: LOCATIONIQ.key,
           lat: this.state.coordinates.lat,
           lon: this.state.coordinates.lon,
           normalizecity: 1,
@@ -56,6 +59,7 @@ export default class App extends React.Component {
       this.setState({
         location: {city: address.city, country: address.country} //pass the data to a state
       });
+      this.getWeatherData();
     })
     .catch(error => {
       console.log(`Location call failed: ${error.message}`);
@@ -65,9 +69,9 @@ export default class App extends React.Component {
     event.preventDefault(); //prevents the search form from reloading the page
     Axios({
       method: 'get',
-      url: API.searchUrl,
+      url: LOCATIONIQ.searchUrl,
       params: {
-          key: API.key,
+          key: LOCATIONIQ.key,
           q: event.target.query.value,
           addressdetails: 1,
           normalizecity: 1,
@@ -83,6 +87,26 @@ export default class App extends React.Component {
     })
     .catch(error => {
       console.log(`Location call failed: ${error.message}`);
+    })
+  }
+  getWeatherData() {
+    Axios({
+      method: 'get',
+      url: WEATHER.url,
+      params: {
+          appid: WEATHER.key,
+          lat: this.state.coordinates.lat,
+          lon: this.state.coordinates.lon,
+          lang: this.state.language,
+          exclude: 'minutely'
+      }
+    })
+    .then(response => {
+      const weather = response.data;
+      console.log(weather);
+    })
+    .catch(error => {
+      console.log(`Weather call failed: ${error.message}`);
     })
   }
 
