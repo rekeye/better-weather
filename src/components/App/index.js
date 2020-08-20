@@ -16,9 +16,10 @@ export default class App extends React.Component {
     this.state = {
       coordinates: {},
       location: {},
+      weather: {},
       language: 'en', //it'll be changeable in future patches
       mainType: 'current'
-    }
+    };
 
     this.getCoords = this.getCoords.bind(this);
     this.getLocation = this.getLocation.bind(this);
@@ -26,10 +27,10 @@ export default class App extends React.Component {
     this.getWeatherData = this.getWeatherData.bind(this);
   }
 
-  componentDidMount() {
-    this.getCoords(); 
+  async componentDidMount() {
+    await this.getCoords(); 
   }
-  getCoords() {
+  getCoords() { //coords call
     return navigator.geolocation.getCurrentPosition( //get the position of user
       position => {
         this.setState({
@@ -83,13 +84,14 @@ export default class App extends React.Component {
       this.setState({ //passing the data to a state
         coordinates: {lat: result.lat, lon: result.lon},
         location: {city: result.address.city, country: result.address.country}
-      })
+      });
+      this.getWeatherData();
     })
     .catch(error => {
       console.log(`Location call failed: ${error.message}`);
     })
   }
-  getWeatherData() {
+  getWeatherData() { //api weather call
     Axios({
       method: 'get',
       url: WEATHER.url,
@@ -98,12 +100,16 @@ export default class App extends React.Component {
           lat: this.state.coordinates.lat,
           lon: this.state.coordinates.lon,
           lang: this.state.language,
+          units: 'metric',
           exclude: 'minutely'
       }
     })
     .then(response => {
       const weather = response.data;
       console.log(weather);
+      this.setState({ //passing the weather data to a state
+        weather: weather
+      })
     })
     .catch(error => {
       console.log(`Weather call failed: ${error.message}`);
@@ -112,14 +118,15 @@ export default class App extends React.Component {
 
   render() {
     const type = this.state.mainType; //pick the type of main that is being rendered, its changed by the navbar
+    const weather = this.state.weather;
     return (
-      <div className='App'>
-        <Nav location={this.state.location} searchHandler={this.handleSearch}/>
-        {/*  will add props later */}
-        {type==='current' && <Current/>} 
-        {type==='hbh' && <Hbh/>}
-        {type==='dbd' && <Dbd/>}
-      </div>
+        <div className='App'>
+          <Nav location={this.state.location} searchHandler={this.handleSearch}/>
+          {/*  will add props later */}
+          {type==='current' && <Current weather={weather.current}/>}
+          {type==='hbh' && <Hbh/>}
+          {type==='dbd' && <Dbd/>}
+        </div>
     );
   }
 }

@@ -1,6 +1,6 @@
 nav {
   height: 100vh;
-  width: 20vw;
+  width: 20%;
   background: -webkit-gradient(linear, left top, left bottom, from(#006CA4), to(#0078D4));
   background: linear-gradient(#006CA4, #0078D4);
   font-size: clamp(1.4rem, 1.75vw, 2.4rem);
@@ -60,6 +60,6 @@ nav hr {
 }
 
 footer {
-  font-size: clamp(0.8rem, 1.25vw, 1.5rem);
+  font-size: clamp(0.8rem, 1.25vw, 1.2rem);
 }
 /*# sourceMappingURL=style.css.map */
