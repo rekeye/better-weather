@@ -10,6 +10,8 @@
         font-size: clamp(1.125rem, 1.25vw, 1.65rem);
     } @else if($type=='footer') {
         font-size: clamp(0.8rem, 1.25vw, 1.2rem);
+    } @else if($type=='big') {
+        font-size: clamp(2rem, 2.6vw, 3rem);
     } @else {
         font-size: clamp(1.4rem, 1.75vw, 2.4rem);
     }

@@ -7,41 +7,74 @@ import icons from '../../assets/const/icons.js'
 class Current extends React.Component {
     render() {
         const weather = this.props.weather;
+        const airly = this.props.airly;
+        const timezone = this.props.timezone;
+
+        if(airly===undefined || weather===undefined) return(<main>Loading...</main>);
+            
+        const airPollutantsList = airly.standards.map((obj) => 
+            <div key={obj.pollutant} className='smaller'>{obj.pollutant}: {Math.round(obj.percent)}%</div>
+        )
+        
+        const sunrise = new Date(weather.sunrise * 1000);
+        const sunset = new Date(weather.sunset * 1000);
         
         return (
-            weather !== undefined ? (
-                <main>
-                    <section className='panel'></section>
-                    <div>
-                        <section className='panel'></section>
-                        <section className='panel'></section>
+                <main className='main'>
+                    <section className='panel panel--main'>
+                        <h4 className='panel__title'>Weather</h4>
+                        <section className='panel__content'>
+                            <div className='panel__division panel__division--left'>
+                                <FontAwesomeIcon className='icon' icon={icons[weather.weather[0].icon]}/>
+                                <div>{weather.weather[0].description}</div>
+                            </div>
+                            <div className='panel__division'>
+                                <div>
+                                    <span className='big'>{Math.round(weather.temp * 10) / 10}°C</span>
+                                    <span className='small'> Realfeel: {Math.round(weather.feels_like * 10) / 10}°C</span>
+                                </div>
+                                <div>
+                                    <span className='small'> Humidity: {weather.humidity}%</span>
+                                    <span className='small'> Pressure: {weather.pressure}hPa</span>
+                                    <span className='small'> Wind: {weather.wind_speed}km/h</span>
+                                </div>
+                            </div>
+                        </section>
+                    </section>
+                    <div className='main__bottom'>
+                        <section className='panel panel--additional'>
+                            <h4 className='panel__title'>Sunrise and sunset</h4>
+                            <section className='panel__content--times small'>
+                                {/* placeholder */}
+                                <div className='padding'>Sunrise: {sunrise.toLocaleTimeString('en-US', {timeZone: timezone, hour: '2-digit', minute:'2-digit',})}</div>
+                                <div className='padding'>Sunset: {sunset.toLocaleTimeString('en-US', {timeZone: timezone, hour: '2-digit', minute:'2-digit',})}</div>
+                            </section>
+                        </section>
+                        <section className='panel panel--additional'>
+                            <h4 className='panel__title'>Air quality</h4>
+                            <section className='panel__content'>
+                                <div className='pollution__circle'>
+                                    <div className='big'>{Math.round(airly.indexes[0].value)}</div>
+                                    <div className='smaller'>CAQI</div>
+                                </div>
+                                <div className='pollution__content'>
+                                    <div className='small'>{airly.indexes[0].description}</div>
+                                    <div className='pollution__list'>
+                                        {airPollutantsList}
+                                    </div>
+                                </div>
+                            </section>
+                        </section>
                     </div>
                 </main>
-            ) : (
-                <main></main>
-            )
         );
     }
 }
 
-// const Current = (props) => (
-//     <div className='container container--parent'>
-//         <section className='data data--main'>
-//             <div>
-//                 <div></div>
-//                 <div>{`${props.weather.feels_like}°C` || ''}</div>
-//             </div>
-//             <div></div>
-//         </section>
-//         <div className='container container--additional'>
-//             <section className='data data--additional'></section>
-//             <section className='data data--additional'></section>
-//         </div>
-//     </div>
-// )
-
 Current.propTypes = {
     weather: PropTypes.object,
+    airly: PropTypes.object,
+    timezone: PropTypes.string,
 }
 
 export default Current;

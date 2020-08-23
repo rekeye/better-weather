@@ -9,6 +9,7 @@ import Dbd from '../Dbd/index.js';
 //constants
 import LOCATIONIQ from '../../assets/const/LOCATIONIQ.js'; 
 import WEATHER from '../../assets/const/WEATHER.js'
+import AIRLY from '../../assets/const/AIRLY.js'; 
 
 export default class App extends React.Component {
   constructor(props) {
@@ -17,8 +18,9 @@ export default class App extends React.Component {
       coordinates: {},
       location: {},
       weather: {},
+      airly: {},
       language: 'en', //it'll be changeable in future patches
-      mainType: 'current'
+      mainType: 'current',
     };
 
     this.getCoords = this.getCoords.bind(this);
@@ -37,6 +39,8 @@ export default class App extends React.Component {
           coordinates: {lat: position.coords.latitude, lon: position.coords.longitude} //pass the coords to a state
         });
         this.getLocation(); //run the api call after coords have been passed
+        this.getAirlyData();
+        this.getWeatherData();
       },
       error => {
         console.log(`Position call failed: ${error.message}`);
@@ -60,7 +64,6 @@ export default class App extends React.Component {
       this.setState({
         location: {city: address.city, country: address.country} //pass the data to a state
       });
-      this.getWeatherData();
     })
     .catch(error => {
       console.log(`Location call failed: ${error.message}`);
@@ -86,6 +89,7 @@ export default class App extends React.Component {
         location: {city: result.address.city, country: result.address.country}
       });
       this.getWeatherData();
+      this.getAirlyData();
     })
     .catch(error => {
       console.log(`Location call failed: ${error.message}`);
@@ -115,15 +119,40 @@ export default class App extends React.Component {
       console.log(`Weather call failed: ${error.message}`);
     })
   }
+  getAirlyData() {
+    Axios({
+      method: 'get',
+      url: AIRLY.url,
+      params: {
+          lat: this.state.coordinates.lat,
+          lng: this.state.coordinates.lon,
+      },
+      headers: {
+        'Accept-Language': this.state.language,
+        'apikey': AIRLY.key, 
+      },
+    })
+    .then(response => {
+      const data = response.data;
+      console.log(data);
+      this.setState({ //passing the weather data to a state
+        airly: data
+      })
+    })
+    .catch(error => {
+      console.log(`Airly call failed: ${error.message}`);
+    })
+  }
 
   render() {
     const type = this.state.mainType; //pick the type of main that is being rendered, its changed by the navbar
     const weather = this.state.weather;
+    const airly = this.state.airly;
     return (
         <div className='App'>
           <Nav location={this.state.location} searchHandler={this.handleSearch}/>
           {/*  will add props later */}
-          {type==='current' && <Current weather={weather.current}/>}
+          {type==='current' && <Current timezone={weather.timezone} weather={weather.current} airly={airly.current}/>}
           {type==='hbh' && <Hbh/>}
           {type==='dbd' && <Dbd/>}
         </div>

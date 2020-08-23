@@ -1,9 +1,81 @@
 @import '../../../assets/scss/variables';
 @import '../../../assets/scss/mixins';
 
-main {
+.main {
     width: 80%;
     @include flex-column();
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: center;
+    color: $blue-2;
+    &__bottom {
+        height:30%;
+        width: 90%;
+        @include flex();
+        justify-content: space-between;
+    }
+}
+.panel {
+    &--main {
+        width: 90%;
+    }
+    &--additional {
+        width: 40%;
+    }
+    &__title {
+        border-bottom: 1px solid $blue-2
+    }
+    &__content {
+        @include flex();
+        align-items: center;
+        justify-content: center;
+        &--times {
+            @include flex-column();
+        }
+    }
+    &__division {
+        padding: 1.2em;
+        @include flex-column();
+        justify-content: center;
+        &--left {
+            width: 36%;
+            border-right: 1px solid $blue-2;
+            align-items: center;    
+        }
+    }
+}
+.icon {
+    font-size: 12rem;
+    margin: 0.1em;
+    color: transparent;
+    stroke: $blue-2;
+    stroke-width: 8px;
+}
+.pollution {
+    &__circle {
+        height: 3.2em;
+        width: 3.2em;
+        margin-right: 1em;
+        border: 3px solid $blue-2;
+        border-radius: 100%;
+        text-align: center;
+    }
+    &__content {
+        width: 60%;
+    }
+    &__list {
+        @include flex();
+        justify-content: space-between;
+    }
+}
+.big {
+    @include font-size('big')
+}
+.small {
+    @include font-size('small')
+}
+.smaller {
+    @include font-size('footer')
+}
+.padding {
+    padding: 0.5em;
 }

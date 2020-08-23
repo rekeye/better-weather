@@ -44,7 +44,7 @@ nav hr {
 .links {
   height: -webkit-fill-available;
   height: -moz-available;
-  height: fill-available;
+  height: stretch;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
