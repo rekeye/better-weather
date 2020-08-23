@@ -1,13 +1,12 @@
 @import '../../../assets/scss/variables';
+@import '../../../assets/scss/mixins';
 
 nav {
     height: 100vh;
     width: 20%;
     background: linear-gradient($blue-1, $blue-2);
-    font-size: clamp(1.4rem, 1.75vw, 2.4rem);
     color: $grey;
-    display: flex;
-    flex-direction: column;
+    @include flex-column();
     align-items: center;
     * {
         width: 90%;
@@ -22,17 +21,18 @@ nav {
     width: #{'min(200px, 90%)'};
 }
 .location {
-    height: 11vh;
-    display: flex;
-    flex-direction: column;
+    padding-bottom: 0.8em;
+    @include flex-column();
 }
 .links {
-    height: 62vh;
-    display: flex;
-    flex-direction: column;
+    height: fill-available;
+    @include flex-column();
     align-items: center;
     justify-content: space-evenly;
 }
 footer {
-    font-size: clamp(0.8rem, 1.25vw, 1.2rem);
+    padding: 1em;
+    border-top: 1px solid $grey;
+    @include font-size('footer');
+    text-align: center;
 }

@@ -3,7 +3,6 @@ nav {
   width: 20%;
   background: -webkit-gradient(linear, left top, left bottom, from(#006CA4), to(#0078D4));
   background: linear-gradient(#006CA4, #0078D4);
-  font-size: clamp(1.4rem, 1.75vw, 2.4rem);
   color: #DFDFDF;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -32,7 +31,7 @@ nav hr {
 }
 
 .location {
-  height: 11vh;
+  padding-bottom: 0.8em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -43,7 +42,9 @@ nav hr {
 }
 
 .links {
-  height: 62vh;
+  height: -webkit-fill-available;
+  height: -moz-available;
+  height: fill-available;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -60,6 +61,9 @@ nav hr {
 }
 
 footer {
+  padding: 1em;
+  border-top: 1px solid #DFDFDF;
   font-size: clamp(0.8rem, 1.25vw, 1.2rem);
+  text-align: center;
 }
 /*# sourceMappingURL=style.css.map */

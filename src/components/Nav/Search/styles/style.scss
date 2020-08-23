@@ -1,8 +1,9 @@
 @import '../../../../assets/scss/variables';
+@import '../../../../assets/scss/mixins';
 
 .search {
-    display: flex;
-    height: #{'max(30px, 3.8vh)'};
+    @include flex();
+    height: 1.8em;
     * {
         background: $grey;
         border: $grey;
@@ -10,7 +11,7 @@
     input {
         padding-left: 6px;
         border-right: 2px solid $blue-1;
-        font-size: clamp(1.125rem, 1.25vw, 1.65rem);
+        @include font-size('small');
         color: $blue-1;
         ::placeholder {
             color: $blue-1;
@@ -18,7 +19,7 @@
     }
     button {
         width: 2.25em;
-        font-size: clamp(1rem, 1.2vw, 1.5rem);
+        @include font-size('small');
         color: $blue-1;
     }
 }

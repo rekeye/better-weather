@@ -2,7 +2,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  height: max(30px, 3.8vh);
+  height: 1.8em;
 }
 
 .search * {
@@ -35,7 +35,7 @@
 
 .search button {
   width: 2.25em;
-  font-size: clamp(1rem, 1.2vw, 1.5rem);
+  font-size: clamp(1.125rem, 1.25vw, 1.65rem);
   color: #006CA4;
 }
 /*# sourceMappingURL=style.css.map */

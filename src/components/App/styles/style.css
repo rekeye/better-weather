@@ -4,5 +4,6 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  font-size: clamp(1.4rem, 1.75vw, 2.4rem);
 }
 /*# sourceMappingURL=style.css.map */

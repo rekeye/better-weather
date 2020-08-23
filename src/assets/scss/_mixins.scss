@@ -1,0 +1,16 @@
+@mixin flex-column() {
+    display: flex;
+    flex-direction: column;
+}
+@mixin flex() {
+    display: flex;
+}
+@mixin font-size($type) {
+    @if($type=='small') {
+        font-size: clamp(1.125rem, 1.25vw, 1.65rem);
+    } @else if($type=='footer') {
+        font-size: clamp(0.8rem, 1.25vw, 1.2rem);
+    } @else {
+        font-size: clamp(1.4rem, 1.75vw, 2.4rem);
+    }
+}

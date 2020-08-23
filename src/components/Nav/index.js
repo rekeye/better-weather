@@ -22,7 +22,6 @@ const Nav = (props) => (
             <div>Day by day <FontAwesomeIcon icon={faChevronRight}/></div>
         </div>
         
-        <hr/>
         <footer>@rekeye, 2020</footer>
     </nav>
 );

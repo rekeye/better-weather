@@ -1,5 +1,8 @@
+@import '../../../assets/scss/mixins';
+
 .App {
   height: 100vh;
   width: 100vw;
-  display: flex;
+  @include flex(); 
+  @include font-size('');
 }
