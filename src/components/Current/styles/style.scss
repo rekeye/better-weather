@@ -28,6 +28,9 @@
         @include flex();
         align-items: center;
         justify-content: center;
+        @media only screen and (max-width: $bp-tablet) {
+            flex-wrap: wrap;
+        }   
         &--times {
             @include flex-column();
         }
@@ -37,9 +40,13 @@
         @include flex-column();
         justify-content: center;
         &--left {
-            width: 36%;
+            width: #{'max(36%, 400px)'};
             border-right: 1px solid $blue-2;
-            align-items: center;    
+            align-items: center; 
+            @media only screen and (max-width: $bp-tablet) {
+                border-right: 0;
+                border-bottom: 1px solid $blue-2;
+            }
         }
     }
 }

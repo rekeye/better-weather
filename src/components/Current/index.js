@@ -10,7 +10,7 @@ class Current extends React.Component {
         const airly = this.props.airly;
         const timezone = this.props.timezone;
 
-        if(airly===undefined || weather===undefined) return(<main>Loading...</main>);
+        if(airly===undefined || weather===undefined) return(<main className='main'>Loading...</main>);
             
         const airPollutantsList = airly.standards.map((obj) => 
             <div key={obj.pollutant} className='smaller'>{obj.pollutant}: {Math.round(obj.percent)}%</div>
@@ -36,7 +36,7 @@ class Current extends React.Component {
                                 <div>
                                     <span className='small'> Humidity: {weather.humidity}%</span>
                                     <span className='small'> Pressure: {weather.pressure}hPa</span>
-                                    <span className='small'> Wind: {weather.wind_speed}km/h</span>
+                                    <span className='small'> Wind: {Math.round(weather.wind_speed * 10) / 10}km/h</span>
                                 </div>
                             </div>
                         </section>

@@ -1,1 +1,58 @@
-/* No CSS *//*# sourceMappingURL=style.css.map */
+.slider {
+  width: 90%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.slider__range {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  width: 85%;
+  height: 1.6em;
+  border-radius: 0.5em;
+  background: #DFDFDF;
+  outline: none;
+  -webkit-transition: opacity .2s;
+  transition: opacity .2s;
+}
+
+.slider__range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+          appearance: none;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  background: #0078D4;
+  cursor: pointer;
+}
+
+.slider__value {
+  display: inline-block;
+  position: relative;
+  width: 12%;
+  color: #DFDFDF;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 3px;
+  background: #0078D4;
+  padding: 5px 10px;
+  margin-left: 8px;
+}
+
+.slider__value:after {
+  position: absolute;
+  top: 8px;
+  left: -7px;
+  width: 0;
+  height: 0;
+  border-top: 7px solid transparent;
+  border-right: 7px solid #0078D4;
+  border-bottom: 7px solid transparent;
+  content: '';
+}
+/*# sourceMappingURL=style.css.map */

@@ -50,6 +50,13 @@
           justify-content: center;
 }
 
+@media only screen and (max-width: 768px) {
+  .panel__content {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+}
+
 .panel__content--times {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -75,11 +82,18 @@
 }
 
 .panel__division--left {
-  width: 36%;
+  width: max(36%, 400px);
   border-right: 1px solid #0078D4;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+@media only screen and (max-width: 768px) {
+  .panel__division--left {
+    border-right: 0;
+    border-bottom: 1px solid #0078D4;
+  }
 }
 
 .icon {

@@ -21,12 +21,17 @@ export default class App extends React.Component {
       airly: {},
       language: 'en', //it'll be changeable in future patches
       mainType: 'current',
+      hour: 0,
+      day: 0,
     };
 
     this.getCoords = this.getCoords.bind(this);
     this.getLocation = this.getLocation.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
     this.getWeatherData = this.getWeatherData.bind(this);
+    this.handleLinkClick = this.handleLinkClick.bind(this);
+    this.handleHourSlider = this.handleHourSlider.bind(this);
+    this.handleDaySlider = this.handleDaySlider.bind(this);
   }
 
   async componentDidMount() {
@@ -111,6 +116,7 @@ export default class App extends React.Component {
     .then(response => {
       const weather = response.data;
       console.log(weather);
+      sessionStorage.setItem('weather', weather);
       this.setState({ //passing the weather data to a state
         weather: weather
       })
@@ -135,6 +141,7 @@ export default class App extends React.Component {
     .then(response => {
       const data = response.data;
       console.log(data);
+      sessionStorage.setItem('airly', data);
       this.setState({ //passing the weather data to a state
         airly: data
       })
@@ -144,17 +151,33 @@ export default class App extends React.Component {
     })
   }
 
+  handleLinkClick(event) {
+    this.setState({
+      mainType: event.target.dataset.type,
+    })
+  }
+  handleHourSlider(event) {
+    this.setState({
+      hour: event.target.value,
+    })
+  }
+  handleDaySlider(event) {
+    this.setState({
+      day: event.target.value,
+    })
+  }
+
   render() {
     const type = this.state.mainType; //pick the type of main that is being rendered, its changed by the navbar
     const weather = this.state.weather;
     const airly = this.state.airly;
     return (
         <div className='App'>
-          <Nav location={this.state.location} searchHandler={this.handleSearch}/>
+          <Nav location={this.state.location} searchHandler={this.handleSearch} linkHandler={this.handleLinkClick}/>
           {/*  will add props later */}
           {type==='current' && <Current timezone={weather.timezone} weather={weather.current} airly={airly.current}/>}
-          {type==='hbh' && <Hbh/>}
-          {type==='dbd' && <Dbd/>}
+          {type==='hbh' && <Hbh timezone={weather.timezone} weather={weather.hourly} airly={airly.forecast} hour={this.state.hour} sliderHandler={this.handleHourSlider}/>}
+          {type==='dbd' && <Dbd timezone={weather.timezone} weather={weather.daily} day={this.state.day} sliderHandler={this.handleDaySlider}/>}
         </div>
     );
   }
