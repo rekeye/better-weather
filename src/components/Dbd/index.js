@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './styles/style.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import icons from '../../assets/const/icons.js'
 
@@ -20,7 +19,7 @@ class Dbd extends React.Component {
         return (
             <main className='main'>
                 <div className="slider">
-                    <input type="range" min="0" max="6" value={day} className="slider__range" onChange={this.props.sliderHandler}/>
+                    <input type="range" min="0" max="6" name="day" value={day} className="slider__range" onChange={this.props.sliderHandler}/>
                     <span className="slider__value small">{weekdays[sunrise.getDay()]}</span>
                 </div>
                 <section className='panel--main'>
@@ -31,14 +30,14 @@ class Dbd extends React.Component {
                             <div>{weather.weather[0].description}</div>
                         </div>
                         <div className='panel__division'>
-                            <div>
-                                <span className='big'>{Math.round(weather.temp.day * 10) / 10}°C</span>
-                                <span className='small'> Realfeel: {Math.round(weather.feels_like.day * 10) / 10}°C</span>
+                            <div className="info-container">
+                                <div className='big'>{Math.round(weather.temp.day * 10) / 10}°C</div>
+                                <div className='small'> Realfeel: {Math.round(weather.feels_like.day * 10) / 10}°C</div>
                             </div>
-                            <div>
-                                <span className='small'> Humidity: {weather.humidity}%</span>
-                                <span className='small'> Pressure: {weather.pressure}hPa</span>
-                                <span className='small'> Wind: {Math.round(weather.wind_speed * 10) / 10}km/h</span>
+                            <div className="info-container small">
+                                <div> Humidity: {weather.humidity}%</div>
+                                <div> Pressure: {weather.pressure}hPa</div>
+                                <div> Wind: {Math.round(weather.wind_speed * 10) / 10}km/h</div>
                             </div>
                         </div>
                     </section>

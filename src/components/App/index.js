@@ -30,8 +30,7 @@ export default class App extends React.Component {
     this.handleSearch = this.handleSearch.bind(this);
     this.getWeatherData = this.getWeatherData.bind(this);
     this.handleLinkClick = this.handleLinkClick.bind(this);
-    this.handleHourSlider = this.handleHourSlider.bind(this);
-    this.handleDaySlider = this.handleDaySlider.bind(this);
+    this.handleSlider = this.handleSlider.bind(this);
   }
 
   async componentDidMount() {
@@ -100,7 +99,7 @@ export default class App extends React.Component {
       console.log(`Location call failed: ${error.message}`);
     })
   }
-  getWeatherData() { //api weather call
+  getWeatherData() { //api call for weather
     Axios({
       method: 'get',
       url: WEATHER.url,
@@ -125,7 +124,7 @@ export default class App extends React.Component {
       console.log(`Weather call failed: ${error.message}`);
     })
   }
-  getAirlyData() {
+  getAirlyData() { //api call for airly
     Axios({
       method: 'get',
       url: AIRLY.url,
@@ -156,14 +155,9 @@ export default class App extends React.Component {
       mainType: event.target.dataset.type,
     })
   }
-  handleHourSlider(event) {
+  handleSlider(event) {
     this.setState({
-      hour: event.target.value,
-    })
-  }
-  handleDaySlider(event) {
-    this.setState({
-      day: event.target.value,
+      [event.target.name]: event.target.value,
     })
   }
 
@@ -174,10 +168,9 @@ export default class App extends React.Component {
     return (
         <div className='App'>
           <Nav location={this.state.location} searchHandler={this.handleSearch} linkHandler={this.handleLinkClick}/>
-          {/*  will add props later */}
           {type==='current' && <Current timezone={weather.timezone} weather={weather.current} airly={airly.current}/>}
-          {type==='hbh' && <Hbh timezone={weather.timezone} weather={weather.hourly} airly={airly.forecast} hour={this.state.hour} sliderHandler={this.handleHourSlider}/>}
-          {type==='dbd' && <Dbd timezone={weather.timezone} weather={weather.daily} day={this.state.day} sliderHandler={this.handleDaySlider}/>}
+          {type==='hbh' && <Hbh timezone={weather.timezone} weather={weather.hourly} airly={airly.forecast} hour={this.state.hour} sliderHandler={this.handleSlider}/>}
+          {type==='dbd' && <Dbd timezone={weather.timezone} weather={weather.daily} day={this.state.day} sliderHandler={this.handleSlider}/>}
         </div>
     );
   }

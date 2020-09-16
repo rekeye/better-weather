@@ -36,6 +36,7 @@
         }
     }
     &__division {
+        width: 70%;
         padding: 1.2em;
         @include flex-column();
         justify-content: center;
@@ -48,6 +49,15 @@
                 border-bottom: 1px solid $blue-2;
             }
         }
+    }
+}
+.info-container {
+    @include flex();
+    align-items: center;
+    flex-wrap: wrap;
+    div {
+        padding: 0.5rem;
+
     }
 }
 .icon {
